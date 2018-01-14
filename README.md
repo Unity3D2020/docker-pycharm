@@ -17,7 +17,7 @@ docker run -d --rm --name pycharm \
        dmitrii-ageev/pycharm
 ```
 
-Docker Hub Page: https://hub.docker.com/r/dmitriiageev/pycharm/
+Docker Hub Page: [https://hub.docker.com/r/dmitriiageev/pycharm](https://hub.docker.com/r/dmitriiageev/pycharm)
 
 ## Notes
 
