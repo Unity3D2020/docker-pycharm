@@ -22,6 +22,7 @@ RUN apt-get install -y \
   libxslt1.1 \
   libxtst6 \
   openjdk-7-jre \
+  openssh-client \
   python \
   python-coverage \
   python-pip \
