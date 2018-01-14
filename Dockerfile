@@ -41,6 +41,7 @@ RUN apt-get install -y \
 RUN groupadd -g 1000 $UNAME
 RUN useradd -u 1000 -g 1000 -m $UNAME
 
+# Switch to the user account
 USER $UNAME
 
 RUN wget $LINK -O $HOME/$FILE
