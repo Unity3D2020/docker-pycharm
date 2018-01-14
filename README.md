@@ -14,9 +14,10 @@ docker run -d --rm --name pycharm \
        -v $HOME/.pycharm:/home/developer/.PyCharmCE2017.3 \
        -v $HOME/.pycharm/java:/home/developer/.java \
        -v $HOME/.pycharm/projects:/home/developer/PycharmProjects \
-       dmitrii-ageev/pycharm
+       dmitriiageev/pycharm
 ```
 
+GitHub Page: [https://github.com/dmitrii-ageev/pycharm](https://github.com/dmitrii-ageev/pycharm)
 Docker Hub Page: [https://hub.docker.com/r/dmitriiageev/pycharm](https://hub.docker.com/r/dmitriiageev/pycharm)
 
 ## Notes
