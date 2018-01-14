@@ -39,7 +39,7 @@ RUN apt-get install -y \
 
 # Create a user
 RUN groupadd -g 1000 $UNAME
-RUN useradd -u 1000 -g 1000 -G audio -m $UNAME
+RUN useradd -u 1000 -g 1000 -m $UNAME
 
 USER $UNAME
 
