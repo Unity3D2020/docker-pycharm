@@ -4,6 +4,7 @@ Docker container to run [PyCharm](https://www.jetbrains.com/pycharm) - Python ID
 
 ## Usage
 
+```
 mkdir -p $HOME/.pycharm/{java,projects}
 docker run -d --rm --name pycharm \
        --net="host" \
@@ -14,6 +15,7 @@ docker run -d --rm --name pycharm \
        -v $HOME/.pycharm/java:/home/developer/.java \
        -v $HOME/.pycharm/projects:/home/developer/PycharmProjects \
        dmitrii-ageev/pycharm
+```
 
 Docker Hub Page: https://hub.docker.com/d/dmitrii-ageev/pycharm/
 
