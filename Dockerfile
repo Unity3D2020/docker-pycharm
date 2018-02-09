@@ -41,7 +41,7 @@ RUN curl -kL -O "${LINK}"
 RUN tar xvzf ./${FILE}
 
 # Remove unwanted stuff
-RUN rm -f ${FILE}
+RUN rm -f ./${FILE}
 RUN apt purge -y --auto-remove curl
 
 # Copy scripts and pulse audio settings
@@ -51,3 +51,4 @@ COPY files/pulse-client.conf /etc/pulse/client.conf
 
 # Proceed to the entry point
 ENTRYPOINT ["/sbin/entrypoint.sh"]
+
