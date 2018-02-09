@@ -1,51 +1,53 @@
-FROM ubuntu:14.04
-LABEL maintainer "Dmitrii Ageev <d.ageev@gmail.com>"
+FROM ubuntu:trusty
+MAINTAINER Dmitrii Ageev <d.ageev@gmail.com>
 
-ENV TOOL pycharm-community-2017.3.2
-ENV FILE $TOOL.tar.gz
-ENV LINK "https://download.jetbrains.com/python/$FILE"
+# Set environment
+ENV APPLICATION "pycharm"
+ENV VERSION "2017.3.2"
+ENV FILE "pycharm-community-${VERSION}.tar.gz"
+ENV LINK "https://download.jetbrains.com/python/${FILE}"
+ENV EXECUTABLE "/pycharm-community-${VERSION}/bin/pycharm.sh"
 
-ENV UNAME developer
-ENV HOME /home/$UNAME
-
+# Install software package
 RUN apt update
-RUN apt-get install -y \
-  bash \
-  cython \
-  cython3 \
-  git \
-  gzip \
-  ipython \
-  ipython3 \
-  libgif4 \
-  libxrender1 \
-  libxslt1.1 \
-  libxtst6 \
-  openjdk-7-jre \
-  openssh-client \
-  python \
-  python-coverage \
-  python-pip \
-  python-pytest \
-  python-setuptools \
-  python-tox \
-  python3 \
-  python3-coverage \
-  python3-setuptools \
-  python3-pip \
-  python3-pytest \
-  wget \
-  --no-install-recommends
+RUN apt install --no-install-recommends -y \
+    sudo \
+    curl \
+    cython \
+    cython3 \
+    git \
+    gzip \
+    ipython \
+    ipython3 \
+    libgif4 \
+    libxrender1 \
+    libxslt1.1 \
+    libxtst6 \
+    openjdk-7-jre \
+    openssh-client \
+    python \
+    python-coverage \
+    python-pip \
+    python-pytest \
+    python-setuptools \
+    python-tox \
+    python3 \
+    python3-coverage \
+    python3-setuptools \
+    python3-pip \
+    python3-pytest
 
-# Create a user
-RUN groupadd -g 1000 $UNAME
-RUN useradd -u 1000 -g 1000 -m $UNAME
+RUN curl -kL -O "${LINK}"
+RUN tar xvzf ./${FILE}
 
-# Switch to the user account
-USER $UNAME
+# Remove unwanted stuff
+RUN rm -f ${FILE}
+RUN apt purge -y --auto-remove curl
 
-RUN wget $LINK -O $HOME/$FILE
-RUN tar xzf $HOME/$FILE -C $HOME/
-RUN rm -f $HOME/$FILE
+# Copy scripts and pulse audio settings
+COPY files/wrapper /sbin/wrapper
+COPY files/entrypoint.sh /sbin/entrypoint.sh
+COPY files/pulse-client.conf /etc/pulse/client.conf
 
-CMD $HOME/$TOOL/bin/pycharm.sh
+# Proceed to the entry point
+ENTRYPOINT ["/sbin/entrypoint.sh"]
